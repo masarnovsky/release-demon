@@ -1,7 +1,5 @@
 package by.masarnovsky.releasedemon.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +23,10 @@ public class Album {
 
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
-    @JsonManagedReference
     private Artist artist;
+
+    public void setArtist(Artist artist) {
+        artist.addAlbum(this);
+        this.artist = artist;
+    }
 }

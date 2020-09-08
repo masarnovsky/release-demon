@@ -1,12 +1,11 @@
 package by.masarnovsky.releasedemon.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +23,13 @@ public class Artist {
     private String uuid;
 
     @OneToMany(mappedBy = "artist")
-    @JsonBackReference
-    private List<Album> albums;
+    private List<Album> albums = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "artists")
+    private List<User> users = new ArrayList<>();
+
+    public void addAlbum(Album album) {
+        album.setArtist(this);
+        albums.add(album);
+    }
 }

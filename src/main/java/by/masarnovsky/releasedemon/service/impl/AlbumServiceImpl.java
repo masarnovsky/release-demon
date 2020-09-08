@@ -1,6 +1,7 @@
 package by.masarnovsky.releasedemon.service.impl;
 
 import by.masarnovsky.releasedemon.entity.Album;
+import by.masarnovsky.releasedemon.entity.Artist;
 import by.masarnovsky.releasedemon.repoitory.AlbumRepository;
 import by.masarnovsky.releasedemon.service.AlbumService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,11 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public List<Album> findByArtist(Integer id) {
         return repository.findByArtist_Id(id);
+    }
+
+    @Override
+    public List<Album> findByArtists(List<Artist> artists) {
+        return repository.findAlbumsByArtistInOrderByReleaseDateDesc(artists);
     }
 
     @Override
