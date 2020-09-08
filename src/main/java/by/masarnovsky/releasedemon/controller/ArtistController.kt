@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/artists")
-@AllArgsConstructor
 class ArtistController(private val artistService: ArtistService, private val artistMapper: ArtistMapper) {
 
     @GetMapping

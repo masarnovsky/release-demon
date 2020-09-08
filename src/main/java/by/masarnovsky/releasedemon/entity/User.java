@@ -32,4 +32,12 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "artist_id")}
     )
     private List<Artist> artists = new ArrayList<>();
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
+    }
 }
