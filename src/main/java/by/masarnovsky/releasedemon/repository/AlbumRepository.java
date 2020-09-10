@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.repoitory;
+package by.masarnovsky.releasedemon.repository;
 
 import by.masarnovsky.releasedemon.entity.Album;
 import by.masarnovsky.releasedemon.entity.Artist;

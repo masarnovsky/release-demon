@@ -33,6 +33,8 @@ public class User {
     )
     private List<Artist> artists = new ArrayList<>();
 
+    // note: for kotlin support because it doesn't work with lombok(
+    // todo: remove after full kotlin migration
     public List<Artist> getArtists() {
         return artists;
     }

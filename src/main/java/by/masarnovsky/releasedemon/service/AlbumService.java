@@ -11,4 +11,5 @@ public interface AlbumService {
     List<Album> findByArtists(List<Artist> artists);
     Album findById(Integer id);
     Album save(Album album);
+    List<Album> saveAll(List<Album> albums);
 }

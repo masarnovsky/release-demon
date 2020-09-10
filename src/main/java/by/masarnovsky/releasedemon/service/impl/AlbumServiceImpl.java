@@ -2,7 +2,7 @@ package by.masarnovsky.releasedemon.service.impl;
 
 import by.masarnovsky.releasedemon.entity.Album;
 import by.masarnovsky.releasedemon.entity.Artist;
-import by.masarnovsky.releasedemon.repoitory.AlbumRepository;
+import by.masarnovsky.releasedemon.repository.AlbumRepository;
 import by.masarnovsky.releasedemon.service.AlbumService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,11 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public Album save(Album album) {
         return repository.save(album);
+    }
+
+    @Override
+    public List<Album> saveAll(List<Album> albums) {
+        return repository.saveAll(albums);
     }
 
 }

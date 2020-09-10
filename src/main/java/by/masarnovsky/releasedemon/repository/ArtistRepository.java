@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.repoitory;
+package by.masarnovsky.releasedemon.repository;
 
 import by.masarnovsky.releasedemon.entity.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -10,4 +10,5 @@ public interface ArtistService {
     Optional<Artist> findById(Integer id);
     Artist findByName(String name);
     Artist save(Artist artist);
+    List<Artist> saveAll(List<Artist> artists);
 }

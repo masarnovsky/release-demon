@@ -1,7 +1,7 @@
 package by.masarnovsky.releasedemon.service.impl;
 
 import by.masarnovsky.releasedemon.entity.Artist;
-import by.masarnovsky.releasedemon.repoitory.ArtistRepository;
+import by.masarnovsky.releasedemon.repository.ArtistRepository;
 import by.masarnovsky.releasedemon.service.ArtistService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,5 +33,10 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public Artist save(Artist artist) {
         return repository.save(artist);
+    }
+
+    @Override
+    public List<Artist> saveAll(List<Artist> artists) {
+        return repository.saveAll(artists);
     }
 }
