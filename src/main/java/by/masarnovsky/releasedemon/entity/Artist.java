@@ -32,4 +32,9 @@ public class Artist {
         album.setArtist(this);
         albums.add(album);
     }
+
+    public Artist(String name, String uuid) {
+        this.name = name;
+        this.uuid = uuid;
+    }
 }

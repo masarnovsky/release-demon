@@ -11,4 +11,5 @@ public interface ArtistService {
     Artist findByName(String name);
     Artist save(Artist artist);
     List<Artist> saveAll(List<Artist> artists);
+    List<Artist> findAllByNameIn(List<String> artist);
 }
