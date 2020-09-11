@@ -1,19 +1,15 @@
 package by.masarnovsky.releasedemon.lastfm;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-//todo: remove data annotations
-
-@Data
 @Getter
 @Setter
-public class LastfmUserLibraryResponseEntity {
+public class LastfmUserLibraryResponse {
     @JsonProperty("artists")
     private LastfmArtistsEntity entity;
 
@@ -22,25 +18,22 @@ public class LastfmUserLibraryResponseEntity {
     }
 }
 
-@Data
 @Getter
 @Setter
-class LastfmArtistEntity {
+class LastfmArtist {
     private String mbid;
     private String name;
 }
 
-@Data
 @Getter
 @Setter
 class LastfmArtistsEntity {
-    private List<LastfmArtistEntity> artist = new ArrayList<>();
+    private List<LastfmArtist> artist = new ArrayList<>();
 
     @JsonProperty("@attr")
     private LastfmUserArtistLibraryAttributes attributes;
 }
 
-@Data
 @Getter
 @Setter
 class LastfmUserArtistLibraryAttributes {

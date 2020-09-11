@@ -25,6 +25,8 @@ public class User {
 
     private String email;
 
+    private String lastfmUsername;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_artist",
