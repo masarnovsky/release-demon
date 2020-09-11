@@ -6,8 +6,10 @@ import by.masarnovsky.releasedemon.service.ArtistService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -16,8 +18,8 @@ public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository repository;
 
     @Override
-    public List<Artist> findAll() {
-        return repository.findAll();
+    public Set<Artist> findAll() {
+        return new HashSet<>(repository.findAll());
     }
 
     @Override

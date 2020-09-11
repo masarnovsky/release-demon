@@ -17,16 +17,16 @@ class UserController(private val userService: UserService, private val artistMap
                      private val albumService: AlbumService, private val albumMapper: AlbumMapper) {
 
     @GetMapping("/{login}/artists")
-    fun findAllUserArtists(@PathVariable login: String): List<ArtistDTO> {
+    fun findAllUserArtists(@PathVariable login: String): Set<ArtistDTO> {
         val user = userService.findByLogin(login)
         return artistMapper.entityListToDtoList(user.artists)
     }
 
     @GetMapping("/{login}/albums")
-    fun findAllUserAlbums(@PathVariable login: String): List<AlbumDTO> {
+    fun findAllUserAlbums(@PathVariable login: String): Set<AlbumDTO> {
         val user = userService.findByLogin(login)
         val albums = albumService.findByArtists(user.artists)
-        val albumsDto = mutableListOf<AlbumDTO>()
+        val albumsDto = mutableSetOf<AlbumDTO>()
         for (album in albums) {
             albumsDto.add(albumMapper.entityToDto(album))
         }

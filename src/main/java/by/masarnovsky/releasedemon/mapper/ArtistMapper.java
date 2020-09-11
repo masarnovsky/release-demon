@@ -4,7 +4,7 @@ import by.masarnovsky.releasedemon.dto.ArtistDTO;
 import by.masarnovsky.releasedemon.entity.Artist;
 import org.mapstruct.Mapper;
 
-import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = AlbumMapper.class)
 public interface ArtistMapper {
@@ -12,5 +12,5 @@ public interface ArtistMapper {
 
     Artist dtoToEntity(ArtistDTO dto);
 
-    List<ArtistDTO> entityListToDtoList(List<Artist> artists);
+    Set<ArtistDTO> entityListToDtoList(Set<Artist> artists);
 }

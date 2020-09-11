@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,10 +23,10 @@ public class Artist {
     private String uuid;
 
     @OneToMany(mappedBy = "artist")
-    private List<Album> albums = new ArrayList<>();
+    private Set<Album> albums = new HashSet<>();
 
     @ManyToMany(mappedBy = "artists")
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
 
     public void addAlbum(Album album) {
         album.setArtist(this);

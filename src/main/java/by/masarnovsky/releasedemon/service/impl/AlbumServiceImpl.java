@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> findByArtists(List<Artist> artists) {
+    public List<Album> findByArtists(Set<Artist> artists) {
         return repository.findAlbumsByArtistInOrderByReleaseDateDesc(artists);
     }
 
