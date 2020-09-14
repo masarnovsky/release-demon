@@ -8,8 +8,8 @@ import by.masarnovsky.releasedemon.service.UserLibraryRetriever;
 import by.masarnovsky.releasedemon.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,8 +19,8 @@ public class LibrarySynchronizationServiceImpl implements LibrarySynchronization
     private final ArtistService artistService;
     private final UserService userService;
 
-    @Override
     @Transactional
+    @Override
     public void synchronizeLibrary(UserLibraryRetriever retriever) {
         User user = userService.findById(1);
         List<String> artistsNames = retriever.retrieve(user.getLastfmUsername());

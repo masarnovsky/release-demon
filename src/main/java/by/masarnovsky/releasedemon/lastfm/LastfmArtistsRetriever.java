@@ -17,7 +17,7 @@ public class LastfmArtistsRetriever implements UserLibraryRetriever {
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
-    Logger logger = LoggerFactory.getLogger(LastfmArtistsRetriever.class);
+    private final Logger logger = LoggerFactory.getLogger(LastfmArtistsRetriever.class);
 
 
     private final static String RETRIEVE_USER_LIBRARY = "http://ws.audioscrobbler.com/2.0/?method=library.getartists&api_key=%s&user=%s&format=json&page=%d";
@@ -36,13 +36,6 @@ public class LastfmArtistsRetriever implements UserLibraryRetriever {
 
         List<String> artistsNames = new ArrayList<>();
         userLibrary.forEach(artist -> artistsNames.add(artist.getName()));
-
-        // todo in external service
-        // get artists from lastfm
-        // get artists from db (from prev. step)
-        // set for user and artist value in many-to-many list
-        // update in database
-
 
         return artistsNames;
     }

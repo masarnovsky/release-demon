@@ -23,7 +23,6 @@ public class SpotifyArtistsRetriever implements UserLibraryRetriever {
     @Value("${spotify.token}")
     private String token;
 
-
     @Override
     public List<String> retrieve(String username) {
         List<SpotifyArtist> userLibrary = new ArrayList<>();
