@@ -13,8 +13,10 @@ import java.time.LocalDate;
 @Setter
 public class AlbumDTO {
     private Integer id;
+    private String mbid;
     private String title;
     private LocalDate releaseDate;
     private Integer artistId;
     private String artistName;
+    private String type;
 }

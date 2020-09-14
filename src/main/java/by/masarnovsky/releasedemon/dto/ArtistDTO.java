@@ -14,6 +14,6 @@ import java.util.List;
 public class ArtistDTO {
     private Integer id;
     private String name;
-    private String uuid;
+    private String mbid;
     private List<AlbumDTO> albums;
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface ArtistRepository extends JpaRepository<Artist, Integer> {
     Artist findByName(String name);
     List<Artist> findAllByNameIn(List<String> artist);
+    List<Artist> findAllByMbidIsNotNull();
 }

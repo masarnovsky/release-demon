@@ -18,4 +18,6 @@ public interface ArtistService {
     List<Artist> saveAll(List<Artist> artists);
 
     List<Artist> findAllByNameIn(List<String> artist);
+
+    List<Artist> findAllWithMbidId();
 }

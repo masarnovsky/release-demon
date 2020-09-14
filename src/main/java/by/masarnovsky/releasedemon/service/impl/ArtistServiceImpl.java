@@ -46,4 +46,9 @@ public class ArtistServiceImpl implements ArtistService {
     public List<Artist> findAllByNameIn(List<String> artists) {
         return repository.findAllByNameIn(artists);
     }
+
+    @Override
+    public List<Artist> findAllWithMbidId() {
+        return repository.findAllByMbidIsNotNull();
+    }
 }

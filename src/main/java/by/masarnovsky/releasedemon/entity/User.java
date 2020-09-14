@@ -27,6 +27,8 @@ public class User {
 
     private String lastfmUsername;
 
+    private String spotifyToken;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_artist",

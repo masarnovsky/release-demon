@@ -20,7 +20,9 @@ public class Artist {
 
     private String name;
 
-    private String uuid;
+    private String mbid;
+
+    private String spotifyId;
 
     @OneToMany(mappedBy = "artist")
     private Set<Album> albums = new HashSet<>();
@@ -31,10 +33,5 @@ public class Artist {
     public void addAlbum(Album album) {
         album.setArtist(this);
         albums.add(album);
-    }
-
-    public Artist(String name, String uuid) {
-        this.name = name;
-        this.uuid = uuid;
     }
 }
