@@ -1,6 +1,5 @@
 package by.masarnovsky.releasedemon.spotify;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +24,16 @@ class SpotifyArtist {
 @Getter
 @Setter
 class SpotifyArtistsEntity {
-    List<SpotifyArtist> items = new ArrayList<>();
+    private List<SpotifyArtist> items = new ArrayList<>();
     private String next;
-    private float total;
-    private float limit;
+    @JsonProperty("cursors")
+    private Cursor cursor;
+    private Integer total;
+    private Integer limit;
+}
 
+@Getter
+@Setter
+class Cursor {
+    private String after;
 }

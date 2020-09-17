@@ -1,6 +1,10 @@
 package by.masarnovsky.releasedemon.lastfm;
 
+import by.masarnovsky.releasedemon.client.LastfmClient;
 import by.masarnovsky.releasedemon.service.UserLibraryRetriever;
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class LastfmArtistsRetriever implements UserLibraryRetriever {
 
     @Value("${last.fm.api.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    @NonNull
+    private final LastfmClient lastfmClient;
+
     private final Logger logger = LoggerFactory.getLogger(LastfmArtistsRetriever.class);
-
-
-    private final static String RETRIEVE_USER_LIBRARY = "http://ws.audioscrobbler.com/2.0/?method=library.getartists&api_key=%s&user=%s&format=json&page=%d";
 
     @Override
     public List<String> retrieve(String username) {
@@ -28,7 +32,7 @@ public class LastfmArtistsRetriever implements UserLibraryRetriever {
         Integer totalPage = 1;
         List<LastfmArtist> userLibrary = new ArrayList<>();
         do {
-            logger.info(String.format("---------- retrieve artists from page %d/%d ----------", page, totalPage));
+            logger.info(String.format("---------- retrieve artists for %s from page %d/%d ----------", username, page, totalPage));
             LastfmUserLibraryResponse artists = retrieveForPage(username, page);
             userLibrary.addAll(artists.getEntity().getArtist());
             totalPage = artists.getAttributes().getTotalPages(); // todo: use that variable
@@ -42,6 +46,6 @@ public class LastfmArtistsRetriever implements UserLibraryRetriever {
 
     private LastfmUserLibraryResponse retrieveForPage(String username, Integer page) {
 
-        return restTemplate.getForObject(String.format(RETRIEVE_USER_LIBRARY, apiKey, username, page), LastfmUserLibraryResponse.class);
+        return lastfmClient.retrievePageWithArtists(apiKey, username, page);
     }
 }
