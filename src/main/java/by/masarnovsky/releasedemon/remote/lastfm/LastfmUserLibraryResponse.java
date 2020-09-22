@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.lastfm;
+package by.masarnovsky.releasedemon.remote.lastfm;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

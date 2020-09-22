@@ -1,6 +1,6 @@
 package by.masarnovsky.releasedemon.client;
 
-import by.masarnovsky.releasedemon.lastfm.LastfmUserLibraryResponse;
+import by.masarnovsky.releasedemon.remote.lastfm.LastfmUserLibraryResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

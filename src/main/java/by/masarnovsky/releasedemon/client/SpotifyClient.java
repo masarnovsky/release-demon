@@ -1,6 +1,6 @@
 package by.masarnovsky.releasedemon.client;
 
-import by.masarnovsky.releasedemon.spotify.SpotifyUserLibraryResponse;
+import by.masarnovsky.releasedemon.remote.spotify.SpotifyUserLibraryResponse;
 import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;

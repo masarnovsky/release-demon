@@ -1,9 +1,7 @@
-package by.masarnovsky.releasedemon.service.impl;
+package by.masarnovsky.releasedemon.remote.musicbrainz;
 
 import by.masarnovsky.releasedemon.entity.Album;
 import by.masarnovsky.releasedemon.entity.Artist;
-import by.masarnovsky.releasedemon.response.MusicbrainzRelease;
-import by.masarnovsky.releasedemon.response.MusicbrainzResponse;
 import by.masarnovsky.releasedemon.service.AlbumService;
 import by.masarnovsky.releasedemon.service.ArtistService;
 import by.masarnovsky.releasedemon.service.InfoSynchromizationService;

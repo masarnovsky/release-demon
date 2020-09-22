@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.spotify;
+package by.masarnovsky.releasedemon.remote.spotify;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

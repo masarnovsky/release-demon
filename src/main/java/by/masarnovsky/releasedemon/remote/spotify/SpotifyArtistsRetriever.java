@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.spotify;
+package by.masarnovsky.releasedemon.remote.spotify;
 
 import by.masarnovsky.releasedemon.client.SpotifyClient;
 import by.masarnovsky.releasedemon.service.UserLibraryRetriever;

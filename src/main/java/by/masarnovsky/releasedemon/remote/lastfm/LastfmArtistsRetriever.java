@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.lastfm;
+package by.masarnovsky.releasedemon.remote.lastfm;
 
 import by.masarnovsky.releasedemon.client.LastfmClient;
 import by.masarnovsky.releasedemon.service.UserLibraryRetriever;
