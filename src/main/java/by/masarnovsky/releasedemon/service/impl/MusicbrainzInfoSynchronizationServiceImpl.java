@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class InfoSynchronizationServiceImpl implements InfoSynchromizationService {
+public class MusicbrainzInfoSynchronizationServiceImpl implements InfoSynchromizationService {
 
     private final ArtistService artistService;
     private final AlbumService albumService;
     private final static String RETRIEVE_ALBUMS_URL = "http://musicbrainz.org/ws/2/artist/%s?inc=release-groups&fmt=json";
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final Logger logger = LoggerFactory.getLogger(InfoSynchronizationServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MusicbrainzInfoSynchronizationServiceImpl.class);
     private static final Integer LIMIT = 1;
 
     @Override

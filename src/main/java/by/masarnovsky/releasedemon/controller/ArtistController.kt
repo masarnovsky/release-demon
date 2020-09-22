@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/artists")
-class ArtistController(private val artistService: ArtistService, private val artistMapper: ArtistMapper) {
+class ArtistController(private val artistService: ArtistService,
+                       private val artistMapper: ArtistMapper) {
 
     @GetMapping
-    fun getAll(): Set<ArtistDTO> = artistMapper.entityListToDtoList(artistService.findAll())
+    fun getAll(): List<ArtistDTO> = artistMapper.entitySetToDtoSet(artistService.findAll())
 
     @GetMapping("/{name}")
     fun getArtistByName(@PathVariable name: String): ArtistDTO {

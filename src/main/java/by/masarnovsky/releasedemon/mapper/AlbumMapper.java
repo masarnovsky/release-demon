@@ -6,6 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+import java.util.Set;
+
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
 
@@ -20,4 +23,6 @@ public interface AlbumMapper {
             @Mapping(target = "artist.name", source = "dto.artistName")
     })
     Album dtoToEntity(AlbumDTO dto);
+
+    List<AlbumDTO> entitySetToDtoSet(List<Album> albums);
 }

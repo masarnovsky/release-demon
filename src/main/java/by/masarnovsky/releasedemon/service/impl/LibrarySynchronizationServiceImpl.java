@@ -19,7 +19,7 @@ public class LibrarySynchronizationServiceImpl implements LibrarySynchronization
     private final ArtistService artistService;
     private final UserService userService;
 
-    @Transactional
+    @Transactional // todo: remove
     @Override
     public void synchronizeLibrary(UserLibraryRetriever retriever) {
         User user = userService.findById(1);

@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/users")
-class UserController(private val userService: UserService, private val artistMapper: ArtistMapper,
-                     private val albumService: AlbumService, private val albumMapper: AlbumMapper) {
+class UserController(private val userService: UserService,
+                     private val artistMapper: ArtistMapper,
+                     private val albumService: AlbumService,
+                     private val albumMapper: AlbumMapper) {
 
     @GetMapping("/{login}/artists")
-    fun findAllUserArtists(@PathVariable login: String): Set<ArtistDTO> {
+    fun findAllUserArtists(@PathVariable login: String): List<ArtistDTO> {
         val user = userService.findByLogin(login)
-        return artistMapper.entityListToDtoList(user.artists)
+        return artistMapper.entitySetToDtoSet(user.artists)
     }
 
     @GetMapping("/{login}/albums")
