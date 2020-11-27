@@ -21,12 +21,14 @@ public class LibrarySynchronizationServiceImpl implements LibrarySynchronization
 
     @Transactional // todo: remove
     @Override
-    public void synchronizeLibrary(UserLibraryRetriever retriever) {
+    public void synchronizeLibrary(UserLibraryRetriever retriever) { // todo: long task
         User user = userService.findById(1);
         List<String> artistsNames = retriever.retrieve(user.getLastfmUsername());
         List<Artist> artists = artistService.findAllByNameIn(artistsNames);
 
+        int artistsCount = user.getArtists().size();
         user.getArtists().addAll(artists);
+        int updatedArtistsCount = user.getArtists().size();
         artists.forEach(artist -> artist.getUsers().add(user));
     }
 }

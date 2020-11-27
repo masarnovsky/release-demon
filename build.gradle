@@ -5,6 +5,17 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.0'
 }
 
+// for correct work with jpa: https://youtrack.jetbrains.com/issue/KT-28525 | https://spring.io/guides/tutorials/spring-boot-kotlin/
+//plugins {
+//	kotlin("plugin.allopen") version "1.3.61"
+//}
+//
+//allOpen {
+//	annotation("javax.persistence.Entity")
+//	annotation("javax.persistence.Embeddable")
+//	annotation("javax.persistence.MappedSuperclass")
+//}
+
 group = 'by.masarnovsky'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'

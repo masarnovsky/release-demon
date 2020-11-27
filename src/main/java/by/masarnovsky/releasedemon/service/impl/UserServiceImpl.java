@@ -6,11 +6,13 @@ import by.masarnovsky.releasedemon.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private UserRepository repository;
+    private final UserRepository repository;
 
     @Override
     public User findByLogin(String login) {
@@ -20,5 +22,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Integer id) {
         return repository.findById(id).get();
+    }
+
+    @Override
+    public List<User> findAllTelegramUsers() {
+        return repository.findAllByTelegramIdNotNull();
     }
 }

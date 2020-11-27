@@ -7,6 +7,7 @@ import by.masarnovsky.releasedemon.service.AlbumService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -23,12 +24,12 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<Album> findByArtist(Integer id) {
-        return repository.findByArtist_Id(id);
+        return repository.findByArtistId(id);
     }
 
     @Override
     public List<Album> findByArtists(Set<Artist> artists) {
-        return repository.findAlbumsByArtistInOrderByReleaseDateDesc(artists);
+        return repository.findAllByArtistInOrderByReleaseDateDesc(artists);
     }
 
     @Override
@@ -46,4 +47,13 @@ public class AlbumServiceImpl implements AlbumService {
         return repository.saveAll(albums);
     }
 
+    @Override
+    public List<Album> findByReleaseDate(LocalDate date) {
+        return repository.findAllByReleaseDate(date);
+    }
+
+    @Override
+    public List<Album> findByReleaseDateBetween(LocalDate from, LocalDate to) {
+        return repository.findAllByReleaseDateBetween(from, to);
+    }
 }
