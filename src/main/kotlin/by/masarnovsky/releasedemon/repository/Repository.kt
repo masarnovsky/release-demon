@@ -25,5 +25,6 @@ interface ArtistRepository : JpaRepository<Artist, Int> {
 @Repository
 interface UserRepository : CrudRepository<User, Int> {
     fun findByLogin(login: String): User?
+    fun findByLastfmUsername(username: String): User?
     fun findAllByTelegramIdNotNull(): List<User>
 }
