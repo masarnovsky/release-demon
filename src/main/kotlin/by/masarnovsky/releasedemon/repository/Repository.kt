@@ -27,4 +27,5 @@ interface UserRepository : CrudRepository<User, Int> {
     fun findByLogin(login: String): User?
     fun findByLastfmUsername(username: String): User?
     fun findAllByTelegramIdNotNull(): List<User>
+    fun deleteAllByLogin(login:String)
 }

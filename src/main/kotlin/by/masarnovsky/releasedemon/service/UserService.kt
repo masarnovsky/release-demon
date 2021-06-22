@@ -3,7 +3,6 @@ package by.masarnovsky.releasedemon.service
 import by.masarnovsky.releasedemon.entity.User
 import by.masarnovsky.releasedemon.repository.UserRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService(
