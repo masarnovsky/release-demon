@@ -1,6 +1,7 @@
 package by.masarnovsky.releasedemon.entity
 
 import java.time.LocalDate
+import java.util.*
 import javax.persistence.*
 
 
@@ -20,6 +21,18 @@ class Album(
 ) {
     fun toDTO(): AlbumDTO {
         return AlbumDTO(this.id, this.mbid, this.title, this.releaseDate, this.artist.id, this.artist.name, this.type)
+    }
+
+    override fun equals(other: Any?): Boolean {
+       return  if (other is Album) {
+            return title == other.title && releaseDate == other.releaseDate
+        } else {
+            false
+       }
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(title, releaseDate)
     }
 }
 

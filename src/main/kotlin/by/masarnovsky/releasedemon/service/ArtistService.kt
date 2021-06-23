@@ -3,9 +3,6 @@ package by.masarnovsky.releasedemon.service
 import by.masarnovsky.releasedemon.entity.Artist
 import by.masarnovsky.releasedemon.repository.ArtistRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
-import java.util.*
-import kotlin.collections.HashSet
 
 @Service
 class ArtistService(
