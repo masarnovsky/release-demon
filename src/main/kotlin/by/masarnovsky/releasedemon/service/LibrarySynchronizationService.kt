@@ -33,6 +33,8 @@ class LibrarySynchronizationService(
     }
 
     private fun addArtistsToUserAndSave(user:User, artists:List<String>) {
+        logger.info { "user artists: ${user.artists.size}, retrieved from library: ${artists.size}" }
+
         user.artists.addAll(artistService.findAllByNameIn(artists))
         userService.save(user)
     }

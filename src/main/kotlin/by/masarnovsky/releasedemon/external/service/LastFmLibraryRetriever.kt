@@ -18,7 +18,7 @@ class LastFmLibraryRetriever(
         val userLibrary: MutableList<LastfmArtist> = mutableListOf()
 
         do {
-            logger.info { "retrieve $page/$totalPage for $username from last.fm" }
+            logger.info { "retrieve $page/$totalPage page for $username from last.fm" }
 
             retrieveForPage(username, page)?.let { response ->
                 userLibrary.addAll(response.entity.artist)
