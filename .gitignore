@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-*/sensitive.properties
+telegram.properties
 */TestController.kt
