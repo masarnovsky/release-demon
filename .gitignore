@@ -37,4 +37,5 @@ out/
 .vscode/
 
 telegram.properties
+sensitive.properties
 */TestController.kt
