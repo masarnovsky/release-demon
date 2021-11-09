@@ -2,25 +2,29 @@ package by.masarnovsky.releasedemon.backend.external.service
 
 import by.masarnovsky.releasedemon.backend.external.dto.LastfmArtist
 import by.masarnovsky.releasedemon.backend.external.dto.LastfmUserLibraryResponse
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.jackson.responseObject
 import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 private val logger = KotlinLogging.logger {}
 
 @Service
-class LastFmLibraryRetriever(
-    val lastFmClient: LastfmClient,
-) : UserLibraryRetriever {
+class LastFmLibraryRetriever : UserLibraryRetriever {
 
-    override fun retrieve(username: String): List<String> {
+    @Value("\${last.fm.api.key}")
+    lateinit var apiKey: String
+
+    override fun retrieve(identifier: String): List<String> {
         var page = 1
         var totalPage = 10
         val userLibrary: MutableList<LastfmArtist> = mutableListOf()
 
         do {
-            logger.info { "retrieve $page/$totalPage page for $username from last.fm" }
+            logger.info { "retrieve $page/$totalPage page for $identifier from last.fm" }
 
-            retrieveForPage(username, page)?.let { response ->
+            retrievePage(identifier, page)?.let { response ->
                 userLibrary.addAll(response.entity.artist)
                 totalPage = response.getAttributes().totalPages
             }
@@ -30,7 +34,14 @@ class LastFmLibraryRetriever(
         return userLibrary.map { artist -> artist.name }
     }
 
-    private fun retrieveForPage(username: String, page: Int): LastfmUserLibraryResponse? {
-        return lastFmClient.retrievePageWithArtists(username, page)
+    private fun retrievePage(username: String, page: Int): LastfmUserLibraryResponse? {
+        val lastfmUrl =
+            "https://ws.audioscrobbler.com/2.0/?method=library.getartists&format=json&api_key=$apiKey&user=$username&page=$page"
+
+        val (_, _, result) = lastfmUrl
+            .httpGet()
+            .responseObject<LastfmUserLibraryResponse>()
+
+        return result.component1()
     }
 }

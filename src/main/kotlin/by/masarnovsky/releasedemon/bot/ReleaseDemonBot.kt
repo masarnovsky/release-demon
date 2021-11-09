@@ -1,5 +1,6 @@
 package by.masarnovsky.releasedemon.bot
 
+import by.masarnovsky.releasedemon.backend.external.service.LastFmLibraryRetriever
 import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.Bot
 import com.elbekD.bot.types.Message
@@ -22,10 +23,12 @@ class ReleaseDemonBot {
     private lateinit var bot: Bot
 
     private val userService: UserService
+    private val retriever: LastFmLibraryRetriever
 
     @Autowired
-    constructor(userService: UserService) {
+    constructor(userService: UserService, retriever: LastFmLibraryRetriever) {
         this.userService = userService
+        this.retriever = retriever
     }
 
 
@@ -91,5 +94,4 @@ class ReleaseDemonBot {
     }
 
     private data class ChatIdAndText(val chatId: Long, val text: String)
-
 }

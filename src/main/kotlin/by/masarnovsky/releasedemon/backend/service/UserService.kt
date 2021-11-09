@@ -16,6 +16,10 @@ class UserService(
         return repository.findByLastfmUsername(username)
     }
 
+    fun findUsersWithLastfmProfiles(): List<User> {
+        return repository.findAllByLastfmUsernameNotNull()
+    }
+
     fun findAllTelegramUsers(): List<User> {
         return repository.findAllByTelegramIdNotNull()
     }
