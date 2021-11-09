@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 class User(
     @Id @GeneratedValue
-    var id: Int?,
+    var id: Long?,
 
     @Column(unique = true)
     val login: String,

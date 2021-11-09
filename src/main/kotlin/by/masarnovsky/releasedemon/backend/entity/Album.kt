@@ -9,7 +9,7 @@ import javax.persistence.*
 class Album(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int?,
+    var id: Long?,
     var mbid: String?,
     var title: String,
     var releaseDate: LocalDate,
@@ -46,11 +46,11 @@ class Album(
 
 
 data class AlbumDTO(
-    var id: Int?,
+    var id: Long?,
     var mbid: String?,
     val title: String,
     val releaseDate: LocalDate,
-    val artistId: Int?,
+    val artistId: Long?,
     val artistName: String,
     var type: String?,
 )

@@ -6,7 +6,7 @@ import javax.persistence.*
 class Artist(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int?,
+    var id: Long?,
     val name: String,
     var mbid: String?,
     var spotifyId: String?,
@@ -33,7 +33,7 @@ class Artist(
 }
 
 data class ArtistDTO(
-    var id: Int?,
+    var id: Long?,
     val name: String,
     var mbid: String?,
     val albums: List<AlbumDTO>
