@@ -1,7 +1,7 @@
-package by.masarnovsky.releasedemon.external.service
+package by.masarnovsky.releasedemon.backend.external.service
 
-import by.masarnovsky.releasedemon.external.dto.MusicbrainzRelease
-import by.masarnovsky.releasedemon.external.dto.MusicbrainzResponse
+import by.masarnovsky.releasedemon.backend.external.dto.MusicbrainzRelease
+import by.masarnovsky.releasedemon.backend.external.dto.MusicbrainzResponse
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
 import org.springframework.stereotype.Service

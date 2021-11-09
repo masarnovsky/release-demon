@@ -1,8 +1,8 @@
-package by.masarnovsky.releasedemon.service
+package by.masarnovsky.releasedemon.backend.service
 
-import by.masarnovsky.releasedemon.entity.Album
-import by.masarnovsky.releasedemon.entity.Artist
-import by.masarnovsky.releasedemon.repository.AlbumRepository
+import by.masarnovsky.releasedemon.backend.entity.Album
+import by.masarnovsky.releasedemon.backend.entity.Artist
+import by.masarnovsky.releasedemon.backend.repository.AlbumRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 

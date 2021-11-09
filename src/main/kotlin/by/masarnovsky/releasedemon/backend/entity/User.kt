@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.entity
+package by.masarnovsky.releasedemon.backend.entity
 
 import java.time.LocalDateTime
 import javax.persistence.*

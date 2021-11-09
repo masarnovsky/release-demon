@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.entity
+package by.masarnovsky.releasedemon.backend.entity
 
 import javax.persistence.*
 
@@ -24,7 +24,11 @@ class Artist(
     }
 
     fun toDTO(): ArtistDTO {
-        return ArtistDTO(this.id, this.name, this.mbid, this.albums.map { it.toDTO() })
+        return ArtistDTO(
+            this.id,
+            this.name,
+            this.mbid,
+            this.albums.map { it.toDTO() })
     }
 }
 

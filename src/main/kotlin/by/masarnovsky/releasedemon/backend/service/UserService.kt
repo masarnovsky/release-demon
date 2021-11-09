@@ -1,7 +1,7 @@
-package by.masarnovsky.releasedemon.service
+package by.masarnovsky.releasedemon.backend.service
 
-import by.masarnovsky.releasedemon.entity.User
-import by.masarnovsky.releasedemon.repository.UserRepository
+import by.masarnovsky.releasedemon.backend.entity.User
+import by.masarnovsky.releasedemon.backend.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

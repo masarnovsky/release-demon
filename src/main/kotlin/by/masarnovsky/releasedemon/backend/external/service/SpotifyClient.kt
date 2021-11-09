@@ -1,6 +1,6 @@
-package by.masarnovsky.releasedemon.external.service
+package by.masarnovsky.releasedemon.backend.external.service
 
-import by.masarnovsky.releasedemon.external.dto.SpotifyUserLibraryResponse
+import by.masarnovsky.releasedemon.backend.external.dto.SpotifyUserLibraryResponse
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.jackson.responseObject
 import org.springframework.beans.factory.annotation.Value

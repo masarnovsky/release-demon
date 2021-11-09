@@ -1,7 +1,7 @@
-package by.masarnovsky.releasedemon.external.service
+package by.masarnovsky.releasedemon.backend.external.service
 
-import by.masarnovsky.releasedemon.external.dto.LastfmArtist
-import by.masarnovsky.releasedemon.external.dto.LastfmUserLibraryResponse
+import by.masarnovsky.releasedemon.backend.external.dto.LastfmArtist
+import by.masarnovsky.releasedemon.backend.external.dto.LastfmUserLibraryResponse
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 

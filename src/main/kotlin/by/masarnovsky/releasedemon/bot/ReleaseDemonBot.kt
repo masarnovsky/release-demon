@@ -1,6 +1,6 @@
 package by.masarnovsky.releasedemon.bot
 
-import by.masarnovsky.releasedemon.service.UserService
+import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.Bot
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging

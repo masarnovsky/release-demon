@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.entity
+package by.masarnovsky.releasedemon.backend.entity
 
 import java.time.LocalDate
 import java.util.*
@@ -20,7 +20,15 @@ class Album(
     var artist: Artist,
 ) {
     fun toDTO(): AlbumDTO {
-        return AlbumDTO(this.id, this.mbid, this.title, this.releaseDate, this.artist.id, this.artist.name, this.type)
+        return AlbumDTO(
+            this.id,
+            this.mbid,
+            this.title,
+            this.releaseDate,
+            this.artist.id,
+            this.artist.name,
+            this.type
+        )
     }
 
     override fun equals(other: Any?): Boolean {

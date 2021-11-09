@@ -1,8 +1,8 @@
-package by.masarnovsky.releasedemon.controller
+package by.masarnovsky.releasedemon.backend.controller
 
-import by.masarnovsky.releasedemon.entity.Artist
-import by.masarnovsky.releasedemon.entity.ArtistDTO
-import by.masarnovsky.releasedemon.service.ArtistService
+import by.masarnovsky.releasedemon.backend.entity.Artist
+import by.masarnovsky.releasedemon.backend.entity.ArtistDTO
+import by.masarnovsky.releasedemon.backend.service.ArtistService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

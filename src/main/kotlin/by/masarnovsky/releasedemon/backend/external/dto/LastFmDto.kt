@@ -1,4 +1,4 @@
-package by.masarnovsky.releasedemon.external.dto
+package by.masarnovsky.releasedemon.backend.external.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -1,8 +1,8 @@
-package by.masarnovsky.releasedemon.repository
+package by.masarnovsky.releasedemon.backend.repository
 
-import by.masarnovsky.releasedemon.entity.Album
-import by.masarnovsky.releasedemon.entity.Artist
-import by.masarnovsky.releasedemon.entity.User
+import by.masarnovsky.releasedemon.backend.entity.Album
+import by.masarnovsky.releasedemon.backend.entity.Artist
+import by.masarnovsky.releasedemon.backend.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository

@@ -1,8 +1,8 @@
-package by.masarnovsky.releasedemon.external.service
+package by.masarnovsky.releasedemon.backend.external.service
 
-import by.masarnovsky.releasedemon.entity.Artist
-import by.masarnovsky.releasedemon.service.AlbumService
-import by.masarnovsky.releasedemon.service.ArtistService
+import by.masarnovsky.releasedemon.backend.entity.Artist
+import by.masarnovsky.releasedemon.backend.service.AlbumService
+import by.masarnovsky.releasedemon.backend.service.ArtistService
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 

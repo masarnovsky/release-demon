@@ -1,8 +1,8 @@
-package by.masarnovsky.releasedemon.external.dto
+package by.masarnovsky.releasedemon.backend.external.dto
 
-import by.masarnovsky.releasedemon.entity.Album
-import by.masarnovsky.releasedemon.entity.Artist
-import by.masarnovsky.releasedemon.utils.tryDate
+import by.masarnovsky.releasedemon.backend.entity.Album
+import by.masarnovsky.releasedemon.backend.entity.Artist
+import by.masarnovsky.releasedemon.backend.utils.tryDate
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class MusicbrainzResponse(
