@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 private val logger = KotlinLogging.logger {}
 
 @Service
+@Deprecated("will be moved to jobs")
 class LibrarySynchronizationService(
     val artistService: ArtistService,
     val userService: UserService,
