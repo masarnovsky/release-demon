@@ -9,22 +9,22 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
 @Repository
-interface AlbumRepository : JpaRepository<Album, Int> {
+interface AlbumRepository : JpaRepository<Album, Long> {
     fun findAllByArtistInOrderByReleaseDateDesc(artists: Set<Artist>): List<Album>
     fun findAllByReleaseDate(date: LocalDate): List<Album>
     fun findAllByReleaseDateBetween(from: LocalDate, to: LocalDate): List<Album>
 }
 
 @Repository
-interface ArtistRepository : JpaRepository<Artist, Int> {
+interface ArtistRepository : JpaRepository<Artist, Long> {
     fun findByName(name: String): Artist?
     fun findAllByNameIn(artist: List<String>): List<Artist>
     fun findAllByMbidIsNotNull(): List<Artist>
 }
 
 @Repository
-interface UserRepository : CrudRepository<User, Int> {
-    fun findByLogin(login: String): User?
+interface UserRepository : CrudRepository<User, Long> {
+    fun findByTelegramId(telegramId: Long): User?
     fun findByLastfmUsername(username: String): User?
     fun findAllByTelegramIdNotNull(): List<User>
     fun findAllByLastfmUsernameNotNull(): List<User>

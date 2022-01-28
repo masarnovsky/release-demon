@@ -3,6 +3,7 @@ package by.masarnovsky.releasedemon.bot
 import by.masarnovsky.releasedemon.backend.external.service.LastFmLibraryRetriever
 import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.Bot
+import com.elbekD.bot.feature.chain.chain
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,11 +25,13 @@ class ReleaseDemonBot {
 
     private val userService: UserService
     private val retriever: LastFmLibraryRetriever
+    private val botService: BotService
 
     @Autowired
-    constructor(userService: UserService, retriever: LastFmLibraryRetriever) {
+    constructor(userService: UserService, retriever: LastFmLibraryRetriever, botService: BotService) {
         this.userService = userService
         this.retriever = retriever
+        this.botService = botService
     }
 
 
@@ -61,14 +64,32 @@ class ReleaseDemonBot {
     }
 
     private fun setBehaviour() {
-        onCommand()
+        startCommand()
         onMessage()
     }
 
-    private fun onCommand() {
-        bot.onCommand(START_COMMAND) { _, _ ->
-            logger.info { "/start command was called" }
-            sendMessage("TODO")
+    private fun startCommand() {
+        bot.chain(START_COMMAND) { message ->
+            logger.info { "$START_COMMAND command was called" }
+
+            var (chatId, text) = getChatIdAndTextFromMessage(message)
+            botService.saveUser(message)
+            sendMessage(chatId, "Please, send your lastfm login and i will try to save your library")
+        }
+            .then { message -> var (chatId, text) = getChatIdAndTextFromMessage(message)
+            botService.saveLastFmUsername(chatId, text)
+                sendMessage(chatId, "<b>$text</b> saved as lastfm username")
+            }
+            .build()
+
+    }
+
+    private fun lastfmCommand() {
+        bot.onCommand(LASTFM_COMMAND) { message, _ ->
+            logger.info { "$LASTFM_COMMAND was called" }
+
+            var (chatId, text) = getChatIdAndTextFromMessage(message)
+
         }
     }
 
@@ -82,7 +103,7 @@ class ReleaseDemonBot {
     }
 
     fun sendMessage(chatId: Any, text: String) {
-        bot.sendMessage(chatId = chatId, text = text, parseMode = "Markdown")
+        bot.sendMessage(chatId = chatId, text = text, parseMode = "HTML")
     }
 
     fun sendMessage(text: String) {

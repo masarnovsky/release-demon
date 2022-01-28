@@ -25,14 +25,6 @@ class LibrarySynchronizationService(
         }
     }
 
-    fun synchronizeLibraryFromSpotify(username: String) {
-        logger.info { "synchronizeLibraryFromSpotify" }
-
-        userService.findByLogin(username)?.let {user->
-            addArtistsToUserAndSave(user, spotifyRetriever.retrieve(username))
-        }
-    }
-
     private fun addArtistsToUserAndSave(user: User, artists:List<String>) {
         logger.info { "user artists: ${user.artists.size}, retrieved from library: ${artists.size}" }
 
