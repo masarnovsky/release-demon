@@ -27,7 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("io.github.microutils:kotlin-logging:2.0.11")
-	implementation("com.github.elbekD:kt-telegram-bot:1.3.5")
+	implementation("com.github.elbekD:kt-telegram-bot:1.4.1")
 	implementation("com.github.kittinunf.fuel:fuel:2.3.1")
 	runtimeOnly("mysql:mysql-connector-java:8.0.25")
 	testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")

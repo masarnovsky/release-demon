@@ -17,7 +17,7 @@ class LibrarySynchronizationService(
     val spotifyRetriever: SpotifyArtistsRetriever,
 ) {
 
-    fun synchronizeLibraryFromLastFm(username: String) {
+    fun synchronizeLibraryFromLastFm(username: String) { // todo: delete as duplicate of LibraryUpdaterJobs
         logger.info { "synchronizeLibraryFromLastFm for $username" }
 
         userService.findByLastFmUsername(username)?.let { user ->
