@@ -24,11 +24,6 @@ class UserService(
         return repository.findByTelegramId(telegramId)
     }
 
-    @Transactional(readOnly = true)
-    fun findAllTelegramUsers(): List<User> {
-        return repository.findAllByTelegramIdNotNull()
-    }
-
     @Transactional
     fun save(user: User): User {
         return repository.save(user)

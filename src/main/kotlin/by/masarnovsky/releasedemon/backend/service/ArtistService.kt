@@ -24,11 +24,6 @@ class ArtistService(
         return repository.save(artist)
     }
 
-    @Transactional
-    fun saveAll(artists: List<Artist>): List<Artist> {
-        return repository.saveAll(artists)
-    }
-
     @Transactional(readOnly = true)
     fun findAllByNameIn(artists: List<String>): List<Artist> {
         return repository.findAllByNameIn(artists)
