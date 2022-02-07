@@ -6,16 +6,15 @@ import javax.persistence.*
 class Artist(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long?,
+    var id: Long? = null,
     val name: String,
-    var mbid: String?,
-    var spotifyId: String?,
+    var mbid: String? = null,
 
     @OneToMany(mappedBy = "artist")
-    var albums: MutableSet<Album>,
+    var albums: MutableSet<Album> = mutableSetOf(),
 
     @ManyToMany(mappedBy = "artists")
-    var users: MutableSet<User>,
+    var users: MutableSet<User> = mutableSetOf(),
 ) {
 
     fun addAlbum(album: Album) {

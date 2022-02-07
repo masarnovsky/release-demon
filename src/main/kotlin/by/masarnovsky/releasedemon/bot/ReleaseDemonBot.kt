@@ -1,7 +1,5 @@
 package by.masarnovsky.releasedemon.bot
 
-import by.masarnovsky.releasedemon.backend.external.service.LastFmLibraryRetriever
-import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.Bot
 import com.elbekD.bot.feature.chain.chain
 import com.elbekD.bot.types.Message
@@ -23,14 +21,10 @@ class ReleaseDemonBot {
     var isProd = false
     private lateinit var bot: Bot
 
-    private val userService: UserService
-    private val retriever: LastFmLibraryRetriever
     private val botService: BotService
 
     @Autowired
-    constructor(userService: UserService, retriever: LastFmLibraryRetriever, botService: BotService) {
-        this.userService = userService
-        this.retriever = retriever
+    constructor(botService: BotService) {
         this.botService = botService
     }
 
@@ -65,6 +59,7 @@ class ReleaseDemonBot {
 
     private fun setBehaviour() {
         startCommand()
+        suggestCommand()
         onMessage()
     }
 
@@ -72,11 +67,11 @@ class ReleaseDemonBot {
         bot.chain(START_COMMAND) { message ->
             logger.info { "$START_COMMAND command was called" }
 
-            var (chatId, text) = getChatIdAndTextFromMessage(message)
+            val (chatId, _) = getChatIdAndTextFromMessage(message)
             botService.saveUser(message)
             sendMessage(chatId, "Please, send your lastfm login and i will try to save your library")
         }
-            .then { message -> var (chatId, text) = getChatIdAndTextFromMessage(message)
+            .then { message -> val (chatId, text) = getChatIdAndTextFromMessage(message)
             botService.saveLastFmUsername(chatId, text)
                 sendMessage(chatId, "<b>$text</b> saved as lastfm username")
             }
@@ -84,21 +79,19 @@ class ReleaseDemonBot {
 
     }
 
-    private fun lastfmCommand() {
-        bot.onCommand(LASTFM_COMMAND) { message, _ ->
-            logger.info { "$LASTFM_COMMAND was called" }
-
-            var (chatId, text) = getChatIdAndTextFromMessage(message)
-
+    private fun suggestCommand() {
+        bot.onCommand(SUGGEST_COMMAND) { message, _ ->
+            var (chatId, _) = getChatIdAndTextFromMessage(message)
+            sendMessage(chatId, botService.suggestArtists(chatId).toString())
         }
     }
 
     private fun onMessage() {
         bot.onMessage { message ->
 
-            var (chatId, text) = getChatIdAndTextFromMessage(message)
+            val (chatId, _) = getChatIdAndTextFromMessage(message)
 
-            sendMessage(chatId, text)
+            sendMessage(chatId, "I can't understand your command")
         }
     }
 

@@ -16,6 +16,7 @@ interface ArtistRepository : JpaRepository<Artist, Long> {
     fun findByName(name: String): Artist?
     fun findAllByNameIn(artist: List<String>): List<Artist>
     fun findAllByMbidIsNotNull(): List<Artist>
+    fun findAllByUsers_TelegramId(telegramId: Long): Set<Artist>
 }
 
 @Repository

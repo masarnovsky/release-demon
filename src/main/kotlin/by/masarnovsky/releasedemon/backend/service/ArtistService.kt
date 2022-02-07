@@ -33,4 +33,9 @@ class ArtistService(
     fun findAllWithMbidId(): List<Artist> {
         return repository.findAllByMbidIsNotNull()
     }
+
+    @Transactional(readOnly = true)
+    fun findUserArtistsByTelegramId(chatId: Long): Set<Artist> {
+        return repository.findAllByUsers_TelegramId(chatId)
+    }
 }

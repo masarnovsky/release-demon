@@ -1,6 +1,7 @@
 package by.masarnovsky.releasedemon.bot
 
 import by.masarnovsky.releasedemon.backend.entity.User
+import by.masarnovsky.releasedemon.backend.job.LibraryUpdaterJobs
 import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging
@@ -12,16 +13,8 @@ private val logger = KotlinLogging.logger {}
 @Service
 class BotService(
     val userService: UserService,
+    val jobs: LibraryUpdaterJobs,
 ) {
-
-
-    fun parseLastfmCommand(command: String) {
-        val username = retrieveTextFromCommand(command, LASTFM_COMMAND)
-
-        if (username.isNotEmpty()) {
-
-        }
-    }
 
     @Transactional
     fun saveLastFmUsername(chatId: Long, lastfmUsername: String) {
@@ -49,5 +42,11 @@ class BotService(
             logger.info { "save new user $user" }
             userService.save(user)
         }
+    }
+
+    fun suggestArtists(chatId: Long): List<String> {
+
+        return jobs.suggestRandomArtists(chatId).map { artist -> artist.name }
+
     }
 }
