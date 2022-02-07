@@ -18,19 +18,19 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.5.6")
-	implementation("org.springframework.boot:spring-boot-starter-web:2.5.6")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.3")
+	implementation("org.springframework.boot:spring-boot-starter-web:2.6.3")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
 	implementation("com.github.kittinunf.fuel:fuel:2.3.1")
 	implementation("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("io.github.microutils:kotlin-logging:2.0.11")
+	implementation("io.github.microutils:kotlin-logging:2.1.21")
 	implementation("com.github.elbekD:kt-telegram-bot:1.4.1")
 	implementation("com.github.kittinunf.fuel:fuel:2.3.1")
 	runtimeOnly("mysql:mysql-connector-java:8.0.25")
-	testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")
+	testImplementation("org.liquibase:liquibase-core:4.7.1")
 }
 
 tasks.withType<KotlinCompile> {
