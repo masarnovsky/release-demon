@@ -6,6 +6,7 @@ import javax.persistence.*
 
 
 @Entity
+@Table(name = "albums")
 class Album(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

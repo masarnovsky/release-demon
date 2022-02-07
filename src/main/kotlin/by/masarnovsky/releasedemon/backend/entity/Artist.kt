@@ -3,6 +3,7 @@ package by.masarnovsky.releasedemon.backend.entity
 import javax.persistence.*
 
 @Entity
+@Table(name = "artists")
 class Artist(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,12 +10,12 @@
     <changeSet author="maksim.masarnovsky" id="new-artists-table">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="Artists"/>
+                <tableExists tableName="artists"/>
             </not>
         </preConditions>
 
         <sql>
-            CREATE TABLE Artists (
+            CREATE TABLE artists (
             id BIGINT NOT NULL AUTO_INCREMENT,
             name VARCHAR(255) NOT NULL DEFAULT '',
             mbid VARCHAR(36) DEFAULT NULL,
@@ -24,19 +24,19 @@
         </sql>
 
         <rollback>
-            <dropTable tableName="Artists"/>
+            <dropTable tableName="artists"/>
         </rollback>
     </changeSet>
 
     <changeSet author="maksim.masarnovsky" id="new-albums-table">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="Albums"/>
+                <tableExists tableName="albums"/>
             </not>
         </preConditions>
 
         <sql>
-            CREATE TABLE Albums (
+            CREATE TABLE albums (
             id BIGINT NOT NULL AUTO_INCREMENT,
             title VARCHAR(255) NOT NULL DEFAULT '',
             release_date DATE NOT NULL,
@@ -45,24 +45,24 @@
             mbid VARCHAR(36) DEFAULT NULL,
             type VARCHAR(20) DEFAULT NULL,
             PRIMARY KEY (id),
-            FOREIGN KEY (artist_id) REFERENCES Artists(id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE ON UPDATE CASCADE
             );
         </sql>
 
         <rollback>
-            <dropTable tableName="Albums"/>
+            <dropTable tableName="albums"/>
         </rollback>
     </changeSet>
 
     <changeSet author="maksim.masarnovsky" id="new-users-table">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="Users"/>
+                <tableExists tableName="users"/>
             </not>
         </preConditions>
 
         <sql>
-            CREATE TABLE Users (
+            CREATE TABLE users (
             id BIGINT NOT NULL AUTO_INCREMENT,
             lastfm_username VARCHAR(50) DEFAULT NULL,
             last_synchronized DATETIME DEFAULT NULL,
@@ -74,7 +74,7 @@
         </sql>
 
         <rollback>
-            <dropTable tableName="Users"/>
+            <dropTable tableName="users"/>
         </rollback>
     </changeSet>
 
@@ -91,8 +91,8 @@
             user_id BIGINT NOT NULL,
             artist_id BIGINT NOT NULL,
             PRIMARY KEY (id),
-            FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (artist_id) REFERENCES Artists(id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE ON UPDATE CASCADE
             );
         </sql>
 
