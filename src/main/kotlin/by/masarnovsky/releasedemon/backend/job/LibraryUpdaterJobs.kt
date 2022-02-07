@@ -20,12 +20,11 @@ class LibraryUpdaterJobs(
     val artistService: ArtistService,
 ) {
 
-
     fun updateLibraryFromLastfm(chatId: Long) {
         logger.info { "updateLibraryFromLastfm for $chatId started" }
 
-        userService.findByTelegramId(chatId)?.let {
-            user -> updateUserLibraryFromLastfm(user)
+        userService.findByTelegramId(chatId)?.let { user ->
+            updateUserLibraryFromLastfm(user)
         }
     }
 
@@ -46,20 +45,41 @@ class LibraryUpdaterJobs(
         userService.save(user)
     }
 
+    @Transactional(readOnly = true)
     fun suggestRandomArtists(chatId: Long): Set<Artist> {
-        return userService.findByTelegramId(chatId)?.artists?.getRandomNValues(RANDOM_ARTISTS_SUGGESTION_COUNT) ?: setOf()
+        return artistService
+            .findUserArtistsByTelegramId(chatId)
+            .getRandomNValues(RANDOM_ARTISTS_SUGGESTION_COUNT)
     }
 
-    private fun mergeUserArtists(user: User, artists: List<String>): User {
-        logger.info { "user artists: ${user.artists.size}, retrieved from library: ${artists.size}" }
+    private fun mergeUserArtists(user: User, actualUserArtists: List<String>): User {
+        logger.info { "user artists: ${user.artists.size}, retrieved from library: ${actualUserArtists.size}" }
 
-        val actualUserArtists = artistService.findAllByNameIn(artists)
+        val existedUserArtists = artistService.findAllByNameIn(actualUserArtists).toMutableList()
 
-        val newArtists = actualUserArtists.minus(user.artists)
-        logger.info { "new artists for user: ${user.id}: $newArtists" }
-        // send to telegram
+        if (existedUserArtists.size < actualUserArtists.size) {
+            saveNonExistingArtistsFromUserLibrary(existedUserArtists, actualUserArtists)
+        }
 
-        user.artists.addAll(newArtists)
+        val newUserArtists = existedUserArtists.minus(user.artists)
+        logger.info { "new artists for user: ${user.id}: $newUserArtists" }
+
+        user.artists.addAll(newUserArtists)
         return user
+    }
+
+    private fun saveNonExistingArtistsFromUserLibrary(
+        existedUserArtists: MutableList<Artist>,
+        actualUserArtists: List<String>
+    ) {
+        val artistNames = existedUserArtists.map { artist -> artist.name }
+        val newArtists = actualUserArtists
+            .filter { artistName -> !artistNames.contains(artistName) }
+            .map { Artist(name = it) }
+
+        artistService.saveAll(newArtists)
+        existedUserArtists.addAll(newArtists)
+
+        logger.info { "New artists for common library: $newArtists" }
     }
 }

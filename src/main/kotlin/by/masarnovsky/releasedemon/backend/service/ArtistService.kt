@@ -38,4 +38,9 @@ class ArtistService(
     fun findUserArtistsByTelegramId(chatId: Long): Set<Artist> {
         return repository.findAllByUsers_TelegramId(chatId)
     }
+
+    @Transactional
+    fun saveAll(artists: List<Artist>): MutableList<Artist> {
+        return repository.saveAll(artists)
+    }
 }
