@@ -39,7 +39,6 @@ class LibraryUpdaterJobs(
         logger.info { "updateLibraryFromLastfm ended, processed $processedUsers users" }
     }
 
-    @Transactional
     fun updateUserLibraryFromLastfm(user: User) {
         mergeUserArtists(user, lastFmLibraryRetriever.retrieve(user.lastfmUsername!!))
         userService.save(user)
@@ -77,8 +76,9 @@ class LibraryUpdaterJobs(
             .filter { artistName -> !artistNames.contains(artistName) }
             .map { Artist(name = it) }
 
-        artistService.saveAll(newArtists)
+//        artistService.saveAll(newArtists) // ?
         existedUserArtists.addAll(newArtists)
+//         trigger job to update albums for new artists (from musicbrainz)
 
         logger.info { "New artists for common library: $newArtists" }
     }
