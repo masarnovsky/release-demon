@@ -5,9 +5,8 @@ import com.elbekD.bot.feature.chain.chain
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import java.io.FileInputStream
-import java.util.*
 import javax.annotation.PostConstruct
 
 private val logger = KotlinLogging.logger {}
@@ -15,8 +14,11 @@ private val logger = KotlinLogging.logger {}
 @Service
 class ReleaseDemonBot {
 
+    @Value("\${BOT_USERNAME}")
     private lateinit var username: String
+    @Value("\${BOT_TOKEN}")
     private lateinit var token: String
+    @Value("\${OWNER_ID}")
     private lateinit var ownerId: String
     var isProd = false
     private lateinit var bot: Bot
@@ -38,20 +40,20 @@ class ReleaseDemonBot {
             ownerId = System.getenv()["OWNER_ID"].toString()
         } else {
             logger.info { "setup test environment" }
-            val properties = Properties()
-            val propertiesFile = System.getProperty("user.dir") + "\\telegram.properties"
-            val inputStream = FileInputStream(propertiesFile)
-            properties.load(inputStream)
-            token = properties.getProperty("BOT_TOKEN")
-            username = properties.getProperty("BOT_USERNAME")
-            ownerId = properties.getProperty("OWNER_ID")
+//            val properties = Properties()
+//            val propertiesFile = System.getProperty("user.dir") + "\\telegram.properties"
+//            val inputStream = FileInputStream(propertiesFile)
+//            properties.load(inputStream)
+//            token = properties.getProperty("BOT_TOKEN")
+//            username = properties.getProperty("BOT_USERNAME")
+//            ownerId = properties.getProperty("OWNER_ID")
         }
     }
 
     @PostConstruct
     private fun startBot() {
         logger.info { "Starting ReleaseDemonBot bot" }
-        loadProperties()
+//        loadProperties()
         bot = Bot.createPolling(username, token)
         setBehaviour()
         bot.start()
