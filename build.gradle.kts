@@ -29,8 +29,8 @@ dependencies {
 	implementation("io.github.microutils:kotlin-logging:2.1.21")
 	implementation("com.github.elbekD:kt-telegram-bot:1.4.1")
 	implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+	implementation("org.liquibase:liquibase-core:4.9.0")
 	runtimeOnly("mysql:mysql-connector-java:8.0.28")
-	testImplementation("org.liquibase:liquibase-core:4.9.0")
 }
 
 tasks.withType<KotlinCompile> {
