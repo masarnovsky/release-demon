@@ -45,7 +45,7 @@ class LibraryUpdaterJobs(
     }
 
     @Transactional(readOnly = true)
-    fun suggestRandomArtists(chatId: Long): Set<Artist> {
+    fun suggestRandomArtists(chatId: Long): Set<Artist> { // todo: move to artist's service
         return artistService
             .findUserArtistsByTelegramId(chatId)
             .getRandomNValues(RANDOM_ARTISTS_SUGGESTION_COUNT)

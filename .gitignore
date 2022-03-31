@@ -38,4 +38,5 @@ out/
 
 telegram.properties
 tokens.properties
+.env
 */TestController.kt

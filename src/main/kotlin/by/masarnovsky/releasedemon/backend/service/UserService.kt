@@ -28,4 +28,9 @@ class UserService(
     fun save(user: User): User {
         return repository.save(user)
     }
+
+    @Transactional
+    fun clearLastfmUsernameForChatId(chatId: Long) {
+        return repository.clearLastfmUsernameForChatId(chatId)
+    }
 }

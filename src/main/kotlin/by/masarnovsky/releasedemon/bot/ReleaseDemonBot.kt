@@ -31,6 +31,7 @@ class ReleaseDemonBot @Autowired constructor(
     private fun setBehaviour() {
         startCommand()
         suggestCommand()
+        clearCommand()
         onMessage()
     }
 
@@ -45,7 +46,10 @@ class ReleaseDemonBot @Autowired constructor(
             .then { message ->
                 val (chatId, text) = getChatIdAndTextFromMessage(message)
                 botService.saveLastFmUsername(chatId, text)
-                sendMessage(chatId, "<b>$text</b> saved as lastfm username")
+                sendMessage(
+                    chatId,
+                    "<b>$text</b> saved as lastfm username. we started retrieve your library"
+                ) // todo: change text (in case some error
             }
             .build()
 
@@ -55,6 +59,13 @@ class ReleaseDemonBot @Autowired constructor(
         bot.onCommand(SUGGEST_COMMAND) { message, _ ->
             val (chatId, _) = getChatIdAndTextFromMessage(message)
             sendMessage(chatId, botService.suggestArtists(chatId).toString())
+        }
+    }
+
+    private fun clearCommand() { // todo: update command with two-factor question
+        bot.onCommand(CLEAR_COMMAND) { message, _ ->
+            val (chatId, _) = getChatIdAndTextFromMessage(message)
+            botService.clearLastfmUsernameForChatId(chatId)
         }
     }
 
