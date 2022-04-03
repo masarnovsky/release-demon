@@ -30,6 +30,7 @@ class ReleaseDemonBot @Autowired constructor(
 
     private fun setBehaviour() {
         startCommand()
+        meCommand()
         suggestCommand()
         clearCommand()
         onMessage()
@@ -49,7 +50,7 @@ class ReleaseDemonBot @Autowired constructor(
                 sendMessage(
                     chatId,
                     "<b>$text</b> saved as lastfm username. we started retrieve your library"
-                ) // todo: change text (in case some error
+                ) // todo: change text (in case some error)
             }
             .build()
 
@@ -59,6 +60,13 @@ class ReleaseDemonBot @Autowired constructor(
         bot.onCommand(SUGGEST_COMMAND) { message, _ ->
             val (chatId, _) = getChatIdAndTextFromMessage(message)
             sendMessage(chatId, botService.suggestArtists(chatId).toString())
+        }
+    }
+
+    private fun meCommand() {
+        bot.onCommand(ME_COMMAND) { message, _ ->
+            val (chatId, _) = getChatIdAndTextFromMessage(message)
+            sendMessage(chatId, botService.getUserInfo(chatId))
         }
     }
 

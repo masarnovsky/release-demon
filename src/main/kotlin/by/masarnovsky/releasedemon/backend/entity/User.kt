@@ -27,4 +27,8 @@ class User(
             telegramId = message.chat.id,
         )
     }
+
+    override fun toString(): String {
+        return "User(id=$id, lastfmUsername=$lastfmUsername, telegramId=$telegramId)"
+    }
 }

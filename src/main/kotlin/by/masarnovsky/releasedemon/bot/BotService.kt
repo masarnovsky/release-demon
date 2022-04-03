@@ -25,7 +25,7 @@ class BotService(
         if (user != null && user.lastfmUsername != lastfmUsername) {
             user.lastfmUsername = lastfmUsername
 
-            logger.info { "populate user with lastfm username $user" }
+            logger.info { "populate user with lastfm username $lastfmUsername" }
             userService.save(user)
             eventPublisher.publishEvent(LastfmUsernameSavedEvent(user.telegramId!!))
         } else if (user != null) {
@@ -56,5 +56,10 @@ class BotService(
 
     fun suggestArtists(chatId: Long): List<String> {
         return jobs.suggestRandomArtists(chatId).map { artist -> artist.name }
+    }
+
+    fun getUserInfo(chatId: Long): String {
+        logger.info { "Retrieve user info for $chatId" }
+        return userService.findByTelegramId(chatId)?.toString() ?: "none"
     }
 }
