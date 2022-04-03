@@ -2,11 +2,13 @@ package by.masarnovsky.releasedemon.backend.job
 
 import by.masarnovsky.releasedemon.backend.entity.Artist
 import by.masarnovsky.releasedemon.backend.entity.User
+import by.masarnovsky.releasedemon.backend.event.NewArtistsEvent
 import by.masarnovsky.releasedemon.backend.external.service.LastFmLibraryRetriever
 import by.masarnovsky.releasedemon.backend.service.ArtistService
 import by.masarnovsky.releasedemon.backend.service.UserService
 import by.masarnovsky.releasedemon.backend.utils.getRandomNValues
 import mu.KotlinLogging
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -18,6 +20,7 @@ class LibraryUpdaterJobs(
     val lastFmLibraryRetriever: LastFmLibraryRetriever,
     val userService: UserService,
     val artistService: ArtistService,
+    val eventPublisher: ApplicationEventPublisher,
 ) {
 
     fun updateLibraryFromLastfm(chatId: Long) {
@@ -52,12 +55,12 @@ class LibraryUpdaterJobs(
     }
 
     private fun mergeUserArtists(user: User, actualUserArtists: List<String>): User {
-        logger.info { "user artists: ${user.artists.size}, retrieved from library: ${actualUserArtists.size}" }
+        logger.info { "user artists in db: ${user.artists.size}, retrieved from remote library: ${actualUserArtists.size}" }
 
         val existedUserArtists = artistService.findAllByNameIn(actualUserArtists).toMutableList()
 
         if (existedUserArtists.size < actualUserArtists.size) {
-            saveNonExistingArtistsFromUserLibrary(existedUserArtists, actualUserArtists)
+            existedUserArtists.addAll(saveNonExistingArtistsFromUserLibrary(existedUserArtists, actualUserArtists))
         }
 
         val newUserArtists = existedUserArtists.minus(user.artists)
@@ -70,16 +73,16 @@ class LibraryUpdaterJobs(
     private fun saveNonExistingArtistsFromUserLibrary(
         existedUserArtists: MutableList<Artist>,
         actualUserArtists: List<String>
-    ) {
+    ): List<Artist> {
         val artistNames = existedUserArtists.map { artist -> artist.name }
         val newArtists = actualUserArtists
             .filter { artistName -> !artistNames.contains(artistName) }
             .map { Artist(name = it) }
 
-//        artistService.saveAll(newArtists) // ?
-        existedUserArtists.addAll(newArtists)
-//         trigger job to update albums for new artists (from musicbrainz)
+        val newArtistsWithoutAlbums = artistService.saveAll(newArtists)
+        eventPublisher.publishEvent(NewArtistsEvent(newArtistsWithoutAlbums.map { it.id!! }))
 
         logger.info { "New artists for common library: $newArtists" }
+        return newArtists
     }
 }
