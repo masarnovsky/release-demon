@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("org.springframework.boot") version "2.6.5"
+	id("com.diffplug.spotless") version "6.4.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("jvm") version "1.5.10"
 	kotlin("plugin.spring") version "1.5.10"
@@ -42,4 +43,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+	kotlin {
+		ktfmt()
+	}
+	kotlinGradle {
+		ktfmt()
+	}
 }
