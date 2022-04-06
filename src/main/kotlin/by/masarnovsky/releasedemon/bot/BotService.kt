@@ -6,6 +6,7 @@ import by.masarnovsky.releasedemon.backend.job.LibraryUpdaterJobs
 import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging
+import org.springframework.boot.info.BuildProperties
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,6 +18,7 @@ class BotService(
     val userService: UserService,
     val jobs: LibraryUpdaterJobs,
     val eventPublisher: ApplicationEventPublisher,
+    val buildProperties: BuildProperties,
 ) {
 
   @Transactional
@@ -60,6 +62,7 @@ class BotService(
 
   fun getUserInfo(chatId: Long): String {
     logger.info { "Retrieve user info for $chatId" }
-    return userService.findByTelegramId(chatId)?.toString() ?: "none"
+    return (userService.findByTelegramId(chatId)?.toString()
+        ?: "none") + "\nversion: ${buildProperties.version}"
   }
 }

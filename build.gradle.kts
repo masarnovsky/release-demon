@@ -11,7 +11,7 @@ plugins {
 
 group = "by.masarnovsky"
 
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -48,4 +48,10 @@ tasks.withType<Test> { useJUnitPlatform() }
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
   kotlin { ktfmt() }
   kotlinGradle { ktfmt() }
+}
+
+springBoot { buildInfo() }
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+  this.archiveFileName.set("release-demon.jar")
 }
