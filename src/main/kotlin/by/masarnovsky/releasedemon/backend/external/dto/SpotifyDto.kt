@@ -3,8 +3,7 @@ package by.masarnovsky.releasedemon.backend.external.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class SpotifyUserLibraryResponse(
-    @JsonProperty("artists")
-    val entity: SpotifyArtistsEntity,
+    @JsonProperty("artists") val entity: SpotifyArtistsEntity,
 )
 
 data class SpotifyArtist(
@@ -15,13 +14,9 @@ data class SpotifyArtist(
 data class SpotifyArtistsEntity(
     val items: List<SpotifyArtist>,
     val next: String,
-
-    @JsonProperty("cursors")
-    val cursor: Cursor,
+    @JsonProperty("cursors") val cursor: Cursor,
     val total: Int,
     val limit: Int,
 )
 
-data class Cursor(
-    val after: String?
-)
+data class Cursor(val after: String?)

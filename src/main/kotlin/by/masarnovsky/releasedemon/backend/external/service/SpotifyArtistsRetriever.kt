@@ -13,39 +13,38 @@ private val logger = KotlinLogging.logger {}
 @Service
 class SpotifyArtistsRetriever : UserLibraryRetriever {
 
-    @Value("\${spotify.token}")
-    lateinit var token: String
-    var limit = 10
+  @Value("\${spotify.token}") lateinit var token: String
+  var limit = 10
 
-    override fun retrieve(identifier: String): List<String> {
-        val userLibrary: MutableList<SpotifyArtist> = mutableListOf()
-        var after: String? = null
+  override fun retrieve(identifier: String): List<String> {
+    val userLibrary: MutableList<SpotifyArtist> = mutableListOf()
+    var after: String? = null
 
-        do {
-            logger.info { "retrieve after:$after from spotify" }
+    do {
+      logger.info { "retrieve after:$after from spotify" }
 
-            retrievePageAfter(after)?.let { response ->
-                userLibrary.addAll(response.entity.items)
+      retrievePageAfter(after)?.let { response ->
+        userLibrary.addAll(response.entity.items)
 
-                after = response.entity.cursor.after
-            }
-        } while (after != null)
+        after = response.entity.cursor.after
+      }
+    } while (after != null)
 
-        logger.info { "found ${userLibrary.size} artists" }
-        return userLibrary.map { artist -> artist.name }
-    }
+    logger.info { "found ${userLibrary.size} artists" }
+    return userLibrary.map { artist -> artist.name }
+  }
 
-    private fun retrievePageAfter(after: String?): SpotifyUserLibraryResponse? {
-        var spotifyUrl = "https://api.spotify.com/v1/me/following?type=artist&limit=$limit"
+  private fun retrievePageAfter(after: String?): SpotifyUserLibraryResponse? {
+    var spotifyUrl = "https://api.spotify.com/v1/me/following?type=artist&limit=$limit"
 
-        if (after != null) spotifyUrl += "&after=$after"
+    if (after != null) spotifyUrl += "&after=$after"
 
-
-        val (_, _, result) = spotifyUrl
+    val (_, _, result) =
+        spotifyUrl
             .httpGet()
             .header(mapOf("Accept" to "application/json", "Authorization" to token))
             .responseObject<SpotifyUserLibraryResponse>()
 
-        return result.component1()
-    }
+    return result.component1()
+  }
 }

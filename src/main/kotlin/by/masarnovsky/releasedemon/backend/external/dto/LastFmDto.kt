@@ -3,13 +3,12 @@ package by.masarnovsky.releasedemon.backend.external.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class LastfmUserLibraryResponse(
-    @JsonProperty("artists")
-    var entity: LastfmArtistsEntity,
+    @JsonProperty("artists") var entity: LastfmArtistsEntity,
 ) {
 
-    fun getAttributes(): LastfmUserArtistLibraryAttributes {
-        return entity.attributes
-    }
+  fun getAttributes(): LastfmUserArtistLibraryAttributes {
+    return entity.attributes
+  }
 }
 
 data class LastfmArtist(
@@ -19,9 +18,7 @@ data class LastfmArtist(
 
 data class LastfmArtistsEntity(
     var artist: List<LastfmArtist>,
-
-    @JsonProperty("@attr")
-    var attributes: LastfmUserArtistLibraryAttributes,
+    @JsonProperty("@attr") var attributes: LastfmUserArtistLibraryAttributes,
 )
 
 data class LastfmUserArtistLibraryAttributes(

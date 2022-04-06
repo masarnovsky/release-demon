@@ -9,25 +9,23 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
-@Repository
-interface AlbumRepository : JpaRepository<Album, Long> {
-}
+@Repository interface AlbumRepository : JpaRepository<Album, Long> {}
 
 @Repository
 interface ArtistRepository : JpaRepository<Artist, Long> {
-    fun findByName(name: String): Artist?
-    fun findAllByNameIn(artist: List<String>): List<Artist>
-    fun findAllByMbidIsNotNull(): List<Artist>
-    fun findAllByUsers_TelegramId(telegramId: Long): Set<Artist>
+  fun findByName(name: String): Artist?
+  fun findAllByNameIn(artist: List<String>): List<Artist>
+  fun findAllByMbidIsNotNull(): List<Artist>
+  fun findAllByUsers_TelegramId(telegramId: Long): Set<Artist>
 }
 
 @Repository
 interface UserRepository : CrudRepository<User, Long> {
-    fun findByTelegramId(telegramId: Long): User?
-    fun findByLastfmUsername(username: String): User?
-    fun findAllByLastfmUsernameNotNull(): List<User>
+  fun findByTelegramId(telegramId: Long): User?
+  fun findByLastfmUsername(username: String): User?
+  fun findAllByLastfmUsernameNotNull(): List<User>
 
-    @Modifying
-    @Query("update User u set u.lastfmUsername = null where u.telegramId = :chatId")
-    fun clearLastfmUsernameForChatId(chatId: Long)
+  @Modifying
+  @Query("update User u set u.lastfmUsername = null where u.telegramId = :chatId")
+  fun clearLastfmUsernameForChatId(chatId: Long)
 }

@@ -15,20 +15,20 @@ class MusicbrainzInfoSynchronizationService(
     val albumService: AlbumService,
 ) {
 
-    fun updateArtistAlbums() {
-        artistService.findAllWithMbidId().forEach { artist ->
-            retrieveAlbumsForArtistByMbidWithDelay(artist)
+  fun updateArtistAlbums() {
+    artistService.findAllWithMbidId().forEach { artist ->
+      retrieveAlbumsForArtistByMbidWithDelay(artist)
+    }
+  }
+
+  private fun retrieveAlbumsForArtistByMbidWithDelay(artist: Artist) {
+    logger.info { "retrieve albums for ${artist.name}" }
+    musicbrainzClient
+        .retrieveAlbumsForArtistByMbid(artist.mbid!!)
+        .map { release -> release.toEntityFromMusicbrainzRelease(artist) }
+        .forEach { album ->
+          artist.albums.add(album)
+          albumService.save(album)
         }
-    }
-
-    private fun retrieveAlbumsForArtistByMbidWithDelay(artist: Artist) {
-        logger.info { "retrieve albums for ${artist.name}" }
-        musicbrainzClient.retrieveAlbumsForArtistByMbid(artist.mbid!!)
-            .map { release -> release.toEntityFromMusicbrainzRelease(artist) }
-            .forEach { album ->
-                artist.albums.add(album)
-                albumService.save(album)
-            }
-    }
-
+  }
 }

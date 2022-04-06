@@ -14,15 +14,15 @@ class EventListeners(
     val libraryUpdaterJobs: LibraryUpdaterJobs,
 ) {
 
-    @EventListener
-    fun handleNewLastfmUsernameEvent(event: LastfmUsernameSavedEvent) {
-        logger.info { "handleNewLastfmUsernameEvent=$event" }
-        libraryUpdaterJobs.updateLibraryFromLastfm(event.chatId)
-        logger.info { "handleNewLastfmUsernameEvent finished" }
-    }
+  @EventListener
+  fun handleNewLastfmUsernameEvent(event: LastfmUsernameSavedEvent) {
+    logger.info { "handleNewLastfmUsernameEvent=$event" }
+    libraryUpdaterJobs.updateLibraryFromLastfm(event.chatId)
+    logger.info { "handleNewLastfmUsernameEvent finished" }
+  }
 
-    @EventListener
-    fun handleNewArtistsEvent(event: NewArtistsEvent) {
-        logger.info { "handleNewArtistsEvent=$event" }
-    }
+  @EventListener
+  fun handleNewArtistsEvent(event: NewArtistsEvent) {
+    logger.info { "handleNewArtistsEvent=$event" }
+  }
 }
