@@ -14,7 +14,7 @@ services:
       - release-demon-network
   release-demon:
     container_name: release-demon
-    image: masarnovsky/release-demon:latest
+    image: release-demon:latest
     restart: always
     depends_on:
       - mysqldb
