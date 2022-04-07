@@ -2,8 +2,11 @@ package by.masarnovsky.releasedemon.backend.service
 
 import by.masarnovsky.releasedemon.backend.entity.Artist
 import by.masarnovsky.releasedemon.backend.repository.ArtistRepository
+import by.masarnovsky.releasedemon.backend.utils.getRandomNValues
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+
+const val RANDOM_ARTISTS_SUGGESTION_COUNT = 5
 
 @Service
 class ArtistService(
@@ -42,5 +45,10 @@ class ArtistService(
   @Transactional
   fun saveAll(artists: List<Artist>): MutableList<Artist> {
     return repository.saveAll(artists)
+  }
+
+  @Transactional(readOnly = true)
+  fun suggestRandomArtists(chatId: Long): Set<Artist> {
+    return findUserArtistsByTelegramId(chatId).getRandomNValues(RANDOM_ARTISTS_SUGGESTION_COUNT)
   }
 }

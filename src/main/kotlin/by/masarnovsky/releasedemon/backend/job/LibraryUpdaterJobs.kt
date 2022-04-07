@@ -6,14 +6,11 @@ import by.masarnovsky.releasedemon.backend.event.NewArtistsEvent
 import by.masarnovsky.releasedemon.backend.external.service.LastFmLibraryRetriever
 import by.masarnovsky.releasedemon.backend.service.ArtistService
 import by.masarnovsky.releasedemon.backend.service.UserService
-import by.masarnovsky.releasedemon.backend.utils.getRandomNValues
 import mu.KotlinLogging
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 private val logger = KotlinLogging.logger {}
-const val RANDOM_ARTISTS_SUGGESTION_COUNT = 5
 
 @Service
 class LibraryUpdaterJobs(
@@ -44,13 +41,6 @@ class LibraryUpdaterJobs(
   fun updateUserLibraryFromLastfm(user: User) {
     mergeUserArtists(user, lastFmLibraryRetriever.retrieve(user.lastfmUsername!!))
     userService.save(user)
-  }
-
-  @Transactional(readOnly = true)
-  fun suggestRandomArtists(chatId: Long): Set<Artist> { // todo: move to artist's service
-    return artistService
-        .findUserArtistsByTelegramId(chatId)
-        .getRandomNValues(RANDOM_ARTISTS_SUGGESTION_COUNT)
   }
 
   private fun mergeUserArtists(user: User, actualUserArtists: List<String>): User {

@@ -33,6 +33,7 @@ constructor(
   private fun setBehaviour() {
     startCommand()
     meCommand()
+    updateCommand()
     suggestCommand()
     clearCommand()
     onMessage()

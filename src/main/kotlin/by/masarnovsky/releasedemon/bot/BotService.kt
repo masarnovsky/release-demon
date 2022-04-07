@@ -2,7 +2,7 @@ package by.masarnovsky.releasedemon.bot
 
 import by.masarnovsky.releasedemon.backend.entity.User
 import by.masarnovsky.releasedemon.backend.event.LastfmUsernameSavedEvent
-import by.masarnovsky.releasedemon.backend.job.LibraryUpdaterJobs
+import by.masarnovsky.releasedemon.backend.service.ArtistService
 import by.masarnovsky.releasedemon.backend.service.UserService
 import com.elbekD.bot.types.Message
 import mu.KotlinLogging
@@ -16,7 +16,7 @@ private val logger = KotlinLogging.logger {}
 @Service
 class BotService(
     val userService: UserService,
-    val jobs: LibraryUpdaterJobs,
+    val artistService: ArtistService,
     val eventPublisher: ApplicationEventPublisher,
     val buildProperties: BuildProperties,
 ) {
@@ -58,7 +58,7 @@ class BotService(
 
   fun suggestArtists(chatId: Long): List<String> {
     logger.info { "Artists suggestion for $chatId" }
-    return jobs.suggestRandomArtists(chatId).map { artist -> artist.name }
+    return artistService.suggestRandomArtists(chatId).map { artist -> artist.name }
   }
 
   fun getUserInfo(chatId: Long): String {
