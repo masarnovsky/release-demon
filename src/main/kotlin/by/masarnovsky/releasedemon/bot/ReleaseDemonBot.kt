@@ -76,7 +76,14 @@ constructor(
     }
   }
 
-  private fun clearCommand() { // todo: update command with two-factor question
+  private fun updateCommand() {
+    bot.onCommand(UPDATE_COMMAND) { message, _ ->
+      val (chatId, _) = getChatIdAndTextFromMessage(message)
+      sendMessage(chatId, botService.updateUserLibrary(chatId))
+    }
+  }
+
+  private fun clearCommand() {
     bot.onCommand(CLEAR_COMMAND) { message, _ ->
       val (chatId, _) = getChatIdAndTextFromMessage(message)
       botService.clearLastfmUsernameForChatId(chatId)

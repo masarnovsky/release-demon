@@ -57,6 +57,7 @@ class BotService(
   }
 
   fun suggestArtists(chatId: Long): List<String> {
+    logger.info { "Artists suggestion for $chatId" }
     return jobs.suggestRandomArtists(chatId).map { artist -> artist.name }
   }
 
@@ -64,5 +65,11 @@ class BotService(
     logger.info { "Retrieve user info for $chatId" }
     return (userService.findByTelegramId(chatId)?.toString()
         ?: "none") + "\nversion: ${buildProperties.version}"
+  }
+
+  fun updateUserLibrary(chatId: Long): String {
+    logger.info { "Update user library for $chatId" }
+    eventPublisher.publishEvent(LastfmUsernameSavedEvent(chatId))
+    return "We started updating your library"
   }
 }
